@@ -147,6 +147,25 @@ export default function Profile() {
             </AnimatePresence>
 
             <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors">
+              <div className="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+                <User size={20} />
+              </div>
+              <div className="flex-grow">
+                <p className="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Nom complet</p>
+                {isEditing ? (
+                  <input 
+                    type="text"
+                    value={tempUser.name}
+                    onChange={(e) => setTempUser({ ...tempUser, name: e.target.value })}
+                    className="w-full bg-surface-container-highest border-b-2 border-primary px-2 py-1 rounded-t-md focus:outline-none font-medium"
+                  />
+                ) : (
+                  <p className="font-medium">{user.name}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors">
               <div className="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
                 <Mail size={20} />
               </div>

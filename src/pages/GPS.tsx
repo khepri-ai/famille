@@ -25,15 +25,20 @@ const STATIC_FAMILY = [
 
 export default function GPS() {
   const [familyMembers, setFamilyMembers] = useState([...STATIC_FAMILY]);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([48.8566, 2.3522]);
+  const [mapKey, setMapKey] = useState(0);
 
   useEffect(() => {
     const savedUser = localStorage.getItem('family_app_user');
     if (savedUser) {
       const user = JSON.parse(savedUser);
-      setFamilyMembers([
+      const updatedMembers = [
         { id: 1, name: user.name, position: user.position || [48.8584, 2.2945], role: user.role },
         ...STATIC_FAMILY
-      ]);
+      ];
+      setFamilyMembers(updatedMembers);
+      setMapCenter(updatedMembers[0].position as [number, number]);
+      setMapKey(prev => prev + 1);
     } else {
       setFamilyMembers([
         { id: 1, name: 'Marc', position: [48.8584, 2.2945], role: 'Father' },
@@ -41,6 +46,12 @@ export default function GPS() {
       ]);
     }
   }, []);
+
+  const handleFocusMember = (position: [number, number]) => {
+    setMapCenter(position);
+    setMapKey(prev => prev + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <motion.div
@@ -56,9 +67,9 @@ export default function GPS() {
 
       <div className="bg-surface-container rounded-xl overflow-hidden h-[500px] shadow-sm ring-1 ring-outline-variant/10 relative z-10">
         <MapContainer 
-          key={familyMembers[0]?.position?.toString()}
-          center={familyMembers[0]?.position as [number, number] || [48.8566, 2.3522]} 
-          zoom={13} 
+          key={mapKey}
+          center={mapCenter} 
+          zoom={15} 
           scrollWheelZoom={false}
           className="w-full h-full"
         >
@@ -90,19 +101,23 @@ export default function GPS() {
         <h3 className="font-headline text-2xl font-bold px-2">Membres de la tribu</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {familyMembers.map((member) => (
-          <div key={member.id} className="bg-surface-container-low p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-high transition-colors">
-            <div className="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center">
-              <Users size={24} className="text-primary" />
+          <button 
+            key={member.id} 
+            onClick={() => handleFocusMember(member.position as [number, number])}
+            className="bg-surface-container-low p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-high transition-all hover:scale-[1.02] text-left w-full group"
+          >
+            <div className="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+              <Users size={24} className="text-primary group-hover:text-inherit" />
             </div>
-            <div>
+            <div className="flex-grow">
               <p className="font-bold text-on-surface">{member.name}</p>
               <p className="text-xs text-tertiary font-semibold uppercase tracking-widest">{member.role}</p>
               <div className="flex items-center gap-1 text-[10px] text-on-surface-variant mt-1">
                 <MapPin size={10} />
-                <span>Dernière position : il y a 5 min</span>
+                <span>Voir sur la carte</span>
               </div>
             </div>
-          </div>
+          </button>
         ))}
         </div>
       </section>
