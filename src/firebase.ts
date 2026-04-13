@@ -2,16 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 
-// We use a safe import for the config file. 
-// If it's missing on GitHub (which is likely if it's not committed), 
-// the build will fail unless we handle it carefully.
-import firebaseConfigData from '../firebase-applet-config.json';
-
-const firebaseConfig = firebaseConfigData || {};
+// @ts-ignore
+const firebaseConfig = __FIREBASE_CONFIG__ || {};
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+export const db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId);
 export const googleProvider = new GoogleAuthProvider();
 
 // Test connection
