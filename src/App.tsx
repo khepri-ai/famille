@@ -7,6 +7,7 @@ import Planning from './pages/Planning';
 import Photos from './pages/Photos';
 import Recipes from './pages/Recipes';
 import GPS from './pages/GPS';
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="/photos" element={<Photos />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/gps" element={<GPS />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </AnimatePresence>
         </main>

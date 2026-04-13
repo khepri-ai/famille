@@ -50,9 +50,13 @@ export default function GPS() {
           {familyMembers.map((member) => (
             <Marker key={member.id} position={member.position as [number, number]}>
               <Popup>
-                <div className="text-center">
-                  <p className="font-bold">{member.name}</p>
-                  <p className="text-xs">{member.role}</p>
+                <div className="text-center p-1 min-w-[100px]">
+                  <p className="font-headline font-bold text-lg text-primary m-0 leading-tight">{member.name}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant m-0 mt-1">{member.role}</p>
+                  <div className="mt-2 pt-2 border-t border-outline-variant/30 flex items-center justify-center gap-1 text-[10px] text-on-surface-variant">
+                    <MapPin size={10} />
+                    <span>Position actuelle</span>
+                  </div>
                 </div>
               </Popup>
             </Marker>
