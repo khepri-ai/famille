@@ -49,32 +49,34 @@ export default function Recipes() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-5xl mx-auto px-6 pt-8 pb-32"
+      className="max-w-6xl mx-auto px-6 py-12 pb-32"
     >
-      <section className="mb-12">
-        <h2 className="font-headline text-5xl md:text-6xl text-on-surface mb-4 tracking-tight leading-tight">
-          Le Grimoire <br /><span className="italic text-primary">des Saveurs</span>
+      <section className="mb-16 border-b border-primary/20 pb-12">
+        <h2 className="font-headline text-6xl md:text-7xl text-primary mb-6 tracking-tight leading-tight font-bold">
+          Le Grimoire <br /><span className="italic text-on-surface opacity-90">des Saveurs</span>
         </h2>
-        <p className="text-on-surface-variant font-medium mb-8 max-w-md">Retrouvez les secrets culinaires transmis de génération en génération dans notre sanctuaire numérique.</p>
-        <div className="relative group">
-          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-            <Search size={20} className="text-tertiary" />
+        <p className="text-on-surface-variant font-medium mb-10 max-w-xl text-lg italic">Retrouvez les secrets culinaires transmis de génération en génération dans notre sanctuaire numérique.</p>
+        <div className="relative group max-w-2xl">
+          <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+            <Search size={22} className="text-primary" />
           </div>
           <input
             type="text"
-            className="w-full bg-surface-container-highest border-none rounded-xl py-5 pl-14 pr-6 focus:ring-2 focus:ring-primary/30 transition-all text-on-surface placeholder:text-on-surface-variant/50"
+            className="w-full bg-surface-container border border-primary/10 rounded-xl py-6 pl-16 pr-8 focus:ring-2 focus:ring-primary/50 transition-all text-on-surface placeholder:text-on-surface-variant/30 font-medium"
             placeholder="Rechercher une recette de famille..."
           />
         </div>
       </section>
 
-      <section className="mb-12 overflow-hidden -mx-6 px-6">
-        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+      <section className="mb-16 overflow-hidden -mx-6 px-6">
+        <div className="flex gap-4 overflow-x-auto pb-6 no-scrollbar">
           {categories.map((cat, idx) => (
             <button
               key={idx}
-              className={`whitespace-nowrap px-6 py-3 rounded-full font-semibold transition-all ${
-                idx === 0 ? 'bg-primary-container text-on-primary shadow-sm' : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high'
+              className={`whitespace-nowrap px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all border ${
+                idx === 0 
+                  ? 'bg-primary text-on-primary border-primary shadow-xl shadow-primary/20' 
+                  : 'bg-surface-container border-primary/10 text-on-surface-variant hover:border-primary/40 hover:text-primary'
               }`}
             >
               {cat}
@@ -83,55 +85,60 @@ export default function Recipes() {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
-        <div className="md:col-span-7 group cursor-pointer">
-          <div className="relative rounded-lg overflow-hidden h-[400px] mb-4">
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+        <div className="lg:col-span-7 group cursor-pointer relative">
+          <div className="relative rounded-xl overflow-hidden h-[500px] mb-6 border border-primary/10">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOrf3nPVplhk3ZkoPWuzSSttltsZkbQr3rl45IDbyvDbE4hI6gjBwwLfJmO1aiRoY5l6kIer6xgmT_C5zkrS85RaMAEFMqiBRriPQGmRThPZL_uybXISjN4CyHal2VK1GUpmt1ubklur7mQjnVF79YD2A44I1L2e9RnW0eVK_VfPsloySykezpb9CXb0ShBYIbLfP7sGe4pO7qsP04rGHKY7Hbo9unRaZBzrx_IDoVq5663l9OpJNA36CXRgsZRzTldQ-Pq79Hs1Y"
+              src="https://picsum.photos/seed/lasagna/1200/800"
               alt="Featured Recipe"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-1000"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute top-4 left-4 bg-secondary-container/90 backdrop-blur-sm text-on-secondary-container px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Coups de cœur</div>
+            <div className="absolute top-6 left-6 bg-secondary/90 backdrop-blur-md text-on-secondary-fixed px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/50">Coups de cœur</div>
+            <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60"></div>
           </div>
-          <div className="flex justify-between items-start">
+          <div className="flex justify-between items-end">
             <div>
-              <h3 className="font-headline text-3xl text-on-surface mb-2">Les Lasagnes d'Antoinette</h3>
-              <div className="flex gap-4 text-on-surface-variant text-sm font-medium">
-                <span className="flex items-center gap-1"><Clock size={16} /> 1h 30min</span>
-                <span className="flex items-center gap-1"><SignalHigh size={16} /> Difficile</span>
+              <h3 className="font-headline text-4xl text-on-surface mb-3 font-bold group-hover:text-primary transition-colors">Les Lasagnes d'Antoinette</h3>
+              <div className="flex gap-6 text-primary/70 text-[10px] font-bold uppercase tracking-widest">
+                <span className="flex items-center gap-2"><Clock size={16} /> 1h 30min</span>
+                <span className="flex items-center gap-2"><SignalHigh size={16} /> Difficile</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="md:col-span-5 flex flex-col justify-center bg-secondary-fixed p-8 rounded-xl">
-          <Sparkles size={32} className="text-tertiary mb-4" />
-          <h4 className="font-headline text-2xl text-on-secondary-fixed mb-4">Secret du mois</h4>
-          <p className="text-on-secondary-fixed-variant leading-relaxed mb-6">"Le secret d'un bon bœuf bourguignon ? Faites mariner la viande 24h avant dans un vin rouge charpenté avec une branche de thym frais du jardin."</p>
-          <button className="text-on-secondary-fixed font-bold flex items-center gap-2 group">
+        <div className="lg:col-span-5 flex flex-col justify-center bg-secondary-container/20 p-12 rounded-xl border border-secondary/20 relative overflow-hidden group">
+          <div className="absolute -right-12 -bottom-12 opacity-5 group-hover:rotate-12 transition-transform duration-1000">
+            <Sparkles size={240} className="text-secondary" />
+          </div>
+          <Sparkles size={40} className="text-secondary mb-6" />
+          <h4 className="font-headline text-3xl text-secondary mb-6 font-bold">Secret du mois</h4>
+          <p className="text-on-surface leading-relaxed mb-8 text-xl italic font-headline">"Le secret d'un bon bœuf bourguignon ? Faites mariner la viande 24h avant dans un vin rouge charpenté avec une branche de thym frais du jardin."</p>
+          <button className="text-secondary font-bold flex items-center gap-3 group text-xs uppercase tracking-[0.2em] hover:gap-4 transition-all">
             Voir l'astuce complète
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={20} />
           </button>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
         {recipes.map((recipe, idx) => (
           <div key={idx} className="flex flex-col group cursor-pointer">
-            <div className="aspect-[4/5] rounded-lg overflow-hidden bg-surface-container-high mb-4">
+            <div className="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container mb-6 border border-primary/5 group-hover:border-primary/30 transition-all relative">
               <img
                 src={recipe.image}
                 alt={recipe.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover grayscale-[0.4] group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
-            <div className="px-2">
-              <span className="text-tertiary text-xs font-bold uppercase tracking-widest mb-1 block">{recipe.category}</span>
-              <h4 className="font-headline text-xl text-on-surface mb-2">{recipe.title}</h4>
-              <div className="flex gap-4 text-on-surface-variant text-xs font-semibold">
-                <span className="flex items-center gap-1"><Clock size={14} /> {recipe.time}</span>
-                <span className="flex items-center gap-1">
+            <div className="px-1">
+              <span className="text-primary text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{recipe.category}</span>
+              <h4 className="font-headline text-2xl text-on-surface mb-3 font-bold group-hover:text-primary transition-colors">{recipe.title}</h4>
+              <div className="flex gap-6 text-on-surface-variant/60 text-[10px] font-bold uppercase tracking-widest">
+                <span className="flex items-center gap-2"><Clock size={14} /> {recipe.time}</span>
+                <span className="flex items-center gap-2">
                   {recipe.difficulty === 'Facile' ? <SignalLow size={14} /> : recipe.difficulty === 'Moyen' ? <SignalMedium size={14} /> : <SignalHigh size={14} />}
                   {recipe.difficulty}
                 </span>
@@ -139,19 +146,17 @@ export default function Recipes() {
             </div>
           </div>
         ))}
-        <div className="flex flex-col border-2 border-dashed border-outline-variant/30 rounded-lg p-8 items-center justify-center text-center bg-surface-container-low/50 aspect-[4/5]">
-          <Plus size={40} className="text-outline-variant mb-4" />
-          <h4 className="font-headline text-xl text-on-surface mb-2">Une idée ?</h4>
-          <p className="text-on-surface-variant text-sm mb-6">Ajoutez une nouvelle recette au patrimoine de la famille.</p>
-          <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-bold text-sm">Partager</button>
+        <div className="flex flex-col border-2 border-dashed border-primary/10 rounded-xl p-12 items-center justify-center text-center bg-primary/5 aspect-[4/5] group hover:border-primary/40 transition-all cursor-pointer">
+          <Plus size={48} className="text-primary/40 mb-6 group-hover:scale-110 transition-transform" />
+          <h4 className="font-headline text-2xl text-on-surface mb-3 font-bold">Une idée ?</h4>
+          <p className="text-on-surface-variant text-sm mb-8 italic">Ajoutez une nouvelle recette au patrimoine de la famille.</p>
+          <button className="bg-primary text-on-primary px-10 py-4 rounded-lg font-bold text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-primary/10">Partager</button>
         </div>
       </section>
 
-      <div className="fixed bottom-28 right-6 z-40">
-        <button className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-container text-white shadow-xl flex items-center justify-center hover:scale-110 transition-transform duration-300">
-          <Plus size={32} />
-        </button>
-      </div>
+      <button className="fixed bottom-32 right-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40 border-4 border-surface">
+        <Plus size={32} />
+      </button>
     </motion.div>
   );
 }

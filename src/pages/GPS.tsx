@@ -75,20 +75,22 @@ export default function GPS() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="max-w-5xl mx-auto px-6 pt-8 pb-32 space-y-8"
+      className="max-w-6xl mx-auto px-6 py-12 pb-32 space-y-12"
     >
-      <section className="space-y-2">
-        <h2 className="font-headline text-5xl font-bold text-on-surface tracking-tight">GPS Famille</h2>
-        <p className="text-on-surface-variant font-medium text-lg italic opacity-80">Où se trouve la tribu aujourd'hui ? (Version 100% Gratuite)</p>
+      <section className="border-b border-primary/20 pb-8">
+        <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-3 block">Géolocalisation de la Tribu</span>
+        <h2 className="font-headline text-6xl font-bold text-on-surface tracking-tight">GPS Famille</h2>
+        <p className="text-on-surface-variant font-medium text-lg italic mt-4">Où se trouve la tribu aujourd'hui ? <span className="text-primary/50 text-sm not-italic ml-2">(Système de repérage technique)</span></p>
       </section>
 
-      <div className="bg-surface-container rounded-xl overflow-hidden h-[500px] shadow-sm ring-1 ring-outline-variant/10 relative z-10">
+      <div className="bg-surface-container rounded-xl overflow-hidden h-[550px] shadow-2xl border border-primary/10 relative z-10 group">
+        <div className="absolute inset-0 bg-black/10 pointer-events-none z-20 group-hover:bg-transparent transition-all duration-700"></div>
         <MapContainer 
           key={mapKey}
           center={mapCenter} 
           zoom={15} 
           scrollWheelZoom={false}
-          className="w-full h-full"
+          className="w-full h-full grayscale-[0.6] contrast-[1.1] brightness-[0.8] hover:grayscale-0 hover:brightness-100 transition-all duration-1000"
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -96,15 +98,15 @@ export default function GPS() {
           />
           {familyMembers.map((member) => (
             <Marker key={member.id} position={member.position as [number, number]}>
-              <Tooltip permanent direction="top" offset={[0, -40]} className="bg-primary text-on-primary font-bold rounded-full px-3 py-1 border-none shadow-md">
+              <Tooltip permanent direction="top" offset={[0, -40]} className="bg-primary text-on-primary font-bold rounded-lg px-4 py-2 border border-primary/50 shadow-2xl uppercase tracking-widest text-[10px]">
                 {member.name}
               </Tooltip>
               <Popup>
-                <div className="text-center p-1 min-w-[100px]">
-                  <p className="font-headline font-bold text-lg text-primary m-0 leading-tight">{member.name}</p>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant m-0 mt-1">{member.role}</p>
-                  <div className="mt-2 pt-2 border-t border-outline-variant/30 flex items-center justify-center gap-1 text-[10px] text-on-surface-variant">
-                    <MapPin size={10} />
+                <div className="text-center p-3 min-w-[150px] bg-surface-container">
+                  <p className="font-headline font-bold text-xl text-primary m-0 leading-tight">{member.name}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant m-0 mt-2">{member.role}</p>
+                  <div className="mt-4 pt-4 border-t border-primary/10 flex items-center justify-center gap-2 text-[10px] text-primary font-bold uppercase tracking-widest">
+                    <MapPin size={12} />
                     <span>Position actuelle</span>
                   </div>
                 </div>
@@ -114,23 +116,26 @@ export default function GPS() {
         </MapContainer>
       </div>
 
-      <section className="space-y-4">
-        <h3 className="font-headline text-2xl font-bold px-2">Membres de la tribu</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="space-y-8">
+        <div className="flex items-center gap-6">
+          <h3 className="font-headline text-3xl font-bold text-primary">Membres de la tribu</h3>
+          <div className="h-px bg-primary/20 flex-grow"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {familyMembers.map((member) => (
           <button 
             key={member.id} 
             onClick={() => handleFocusMember(member.position as [number, number])}
-            className="bg-surface-container-low p-4 rounded-lg flex items-center gap-4 hover:bg-surface-container-high transition-all hover:scale-[1.02] text-left w-full group"
+            className="bg-surface-container-low p-6 rounded-xl border border-primary/5 flex items-center gap-6 hover:bg-surface-container hover:border-primary/30 transition-all hover:scale-[1.02] text-left w-full group shadow-xl"
           >
-            <div className="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
-              <Users size={24} className="text-primary group-hover:text-inherit" />
+            <div className="w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-all">
+              <Users size={28} />
             </div>
             <div className="flex-grow">
-              <p className="font-bold text-on-surface">{member.name}</p>
-              <p className="text-xs text-tertiary font-semibold uppercase tracking-widest">{member.role}</p>
-              <div className="flex items-center gap-1 text-[10px] text-on-surface-variant mt-1">
-                <MapPin size={10} />
+              <p className="font-bold text-xl text-on-surface group-hover:text-primary transition-colors">{member.name}</p>
+              <p className="text-[10px] text-primary font-bold uppercase tracking-[0.2em] mt-1">{member.role}</p>
+              <div className="flex items-center gap-2 text-[10px] text-on-surface-variant/60 font-bold uppercase tracking-widest mt-3">
+                <MapPin size={12} className="text-primary" />
                 <span>Voir sur la carte</span>
               </div>
             </div>

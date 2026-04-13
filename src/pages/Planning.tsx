@@ -43,46 +43,46 @@ export default function Planning() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      className="max-w-5xl mx-auto px-6 pt-4 pb-32"
+      className="max-w-6xl mx-auto px-6 py-12 pb-32"
     >
-      <div className="mb-8 mt-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-primary/20 pb-8">
         <div>
-          <span className="text-tertiary font-semibold tracking-[0.2em] uppercase text-xs mb-2 block">Our Schedule</span>
-          <h2 className="font-headline text-4xl font-bold text-on-surface">September 2024</h2>
+          <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-3 block">Chronogramme Familial</span>
+          <h2 className="font-headline text-5xl font-bold text-on-surface">Septembre 2024</h2>
         </div>
-        <div className="flex gap-2">
-          <button className="p-3 bg-surface-container rounded-full hover:bg-surface-container-high transition-colors">
+        <div className="flex gap-3">
+          <button className="p-4 bg-surface-container border border-primary/10 rounded-xl hover:bg-primary/10 hover:text-primary transition-all">
             <ChevronLeft size={24} />
           </button>
-          <button className="p-3 bg-surface-container rounded-full hover:bg-surface-container-high transition-colors">
+          <button className="p-4 bg-surface-container border border-primary/10 rounded-xl hover:bg-primary/10 hover:text-primary transition-all">
             <ChevronRight size={24} />
           </button>
         </div>
       </div>
 
-      <section className="bg-surface-container rounded-xl p-6 md:p-8 mb-12 border border-outline-variant/10">
-        <div className="grid grid-cols-7 gap-2 md:gap-4 mb-4">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-            <div key={d} className="text-center text-xs font-bold text-on-surface-variant uppercase tracking-tighter">{d}</div>
+      <section className="bg-surface-container-high rounded-xl p-8 md:p-10 mb-16 border border-primary/10 shadow-2xl">
+        <div className="grid grid-cols-7 gap-4 md:gap-6 mb-8">
+          {['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'].map(d => (
+            <div key={d} className="text-center text-[10px] font-bold text-primary uppercase tracking-[0.2em]">{d}</div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-2 md:gap-4">
+        <div className="grid grid-cols-7 gap-3 md:gap-4">
           {calendarDays.map((d, idx) => (
             <div
               key={idx}
               className={clsx(
-                'aspect-square rounded-lg flex flex-col items-center justify-center relative transition-all',
-                !d.current && 'bg-surface/40 text-on-surface-variant/30',
-                d.current && !d.today && 'bg-surface-container-low shadow-sm',
-                d.today && 'bg-primary-container text-white shadow-md scale-105'
+                'aspect-square rounded-xl flex flex-col items-center justify-center relative transition-all border',
+                !d.current && 'bg-surface/20 border-transparent text-on-surface-variant/20',
+                d.current && !d.today && 'bg-surface-container-low border-primary/5 hover:border-primary/30 text-on-surface',
+                d.today && 'bg-primary border-primary text-on-primary shadow-xl shadow-primary/20 scale-105 z-10'
               )}
             >
-              <span className="font-headline text-lg">{d.day}</span>
-              {d.today && <span className="text-[10px] font-bold uppercase tracking-widest mt-1">Today</span>}
+              <span className="font-headline text-2xl font-bold">{d.day}</span>
+              {d.today && <span className="text-[8px] font-bold uppercase tracking-widest mt-1">Aujourd'hui</span>}
               {d.dots && (
-                <div className="absolute bottom-2 flex gap-0.5">
+                <div className="absolute bottom-3 flex gap-1">
                   {d.dots.map((dot, i) => (
-                    <div key={i} className={clsx('w-1 h-1 rounded-full', dot === 'primary' ? 'bg-primary' : 'bg-secondary')} />
+                    <div key={i} className={clsx('w-1.5 h-1.5 rounded-full', dot === 'primary' ? 'bg-primary' : 'bg-secondary')} />
                   ))}
                 </div>
               )}
@@ -91,42 +91,46 @@ export default function Planning() {
         </div>
       </section>
 
-      <div className="flex items-center gap-4 mb-8">
-        <h3 className="font-headline text-3xl font-bold">Today's Heartbeat</h3>
-        <div className="h-px bg-outline-variant flex-grow opacity-30"></div>
+      <div className="flex items-center gap-6 mb-12">
+        <h3 className="font-headline text-3xl font-bold text-primary">Le Pouls du Jour</h3>
+        <div className="h-px bg-primary/20 flex-grow"></div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {agenda.map((person, idx) => (
-          <div key={idx} className="group flex flex-col md:flex-row gap-6 p-6 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors duration-300">
-            <div className="flex items-center gap-4 md:w-1/4">
-              {typeof person.avatar === 'string' && person.avatar.startsWith('http') ? (
-                <img
-                  src={person.avatar}
-                  alt={person.name}
-                  className="w-14 h-14 rounded-full bg-primary-fixed border-4 border-surface"
-                  referrerPolicy="no-referrer"
-                />
-              ) : (
-                <div className="w-14 h-14 rounded-full bg-tertiary-fixed border-4 border-surface flex items-center justify-center text-2xl">
-                  {person.avatar}
-                </div>
-              )}
+          <div key={idx} className="group flex flex-col md:flex-row gap-8 p-8 bg-surface-container-low rounded-xl border border-outline-variant/5 hover:border-primary/20 transition-all duration-500">
+            <div className="flex items-center gap-6 md:w-1/3">
+              <div className="relative p-1 rounded-full bg-gradient-to-tr from-primary to-primary-container">
+                {typeof person.avatar === 'string' && person.avatar.startsWith('http') ? (
+                  <img
+                    src={person.avatar}
+                    alt={person.name}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-surface"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-surface-container border-2 border-surface flex items-center justify-center text-3xl">
+                    {person.avatar}
+                  </div>
+                )}
+              </div>
               <div>
-                <p className="font-bold text-lg">{person.name}</p>
-                <p className="text-xs text-tertiary font-semibold uppercase tracking-widest">{person.role}</p>
+                <p className="font-bold text-xl text-on-surface">{person.name}</p>
+                <p className="text-[10px] text-primary font-bold uppercase tracking-[0.2em]">{person.role}</p>
               </div>
             </div>
             <div className="flex-grow space-y-4">
               {person.events.map((event, eIdx) => (
-                <div key={eIdx} className={clsx('bg-surface rounded-lg p-4 border-l-4 shadow-sm flex justify-between items-center', event.color)}>
+                <div key={eIdx} className={clsx('bg-surface-container-high rounded-xl p-6 border-l-4 shadow-xl flex justify-between items-center group/event hover:bg-surface-container-highest transition-colors', event.color.replace('border-', 'border-l-'))}>
                   <div>
-                    <p className="font-bold text-on-surface">{event.title}</p>
-                    <p className="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
-                      <Clock size={14} /> {event.time}
+                    <p className="font-bold text-lg text-on-surface group-hover/event:text-primary transition-colors">{event.title}</p>
+                    <p className="text-xs text-on-surface-variant flex items-center gap-2 mt-2 font-medium">
+                      <Clock size={16} className="text-primary" /> {event.time}
                     </p>
                   </div>
-                  <event.icon size={24} className={clsx(event.color.replace('border-', 'text-'))} />
+                  <div className={clsx('p-3 rounded-lg bg-surface', event.color.replace('border-', 'text-'))}>
+                    <event.icon size={24} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -134,7 +138,7 @@ export default function Planning() {
         ))}
       </div>
 
-      <button className="fixed bottom-28 right-8 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl shadow-lg flex items-center justify-center hover:scale-105 transition-transform z-40">
+      <button className="fixed bottom-32 right-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40 border-4 border-surface">
         <Plus size={32} />
       </button>
     </motion.div>
