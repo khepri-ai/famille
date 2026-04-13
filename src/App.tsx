@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Planning from './pages/Planning';
 import Photos from './pages/Photos';
 import Recipes from './pages/Recipes';
+import GPS from './pages/GPS';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
               <Route path="/planning" element={<Planning />} />
               <Route path="/photos" element={<Photos />} />
               <Route path="/recipes" element={<Recipes />} />
+              <Route path="/gps" element={<GPS />} />
             </Routes>
           </AnimatePresence>
         </main>

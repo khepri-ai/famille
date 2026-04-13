@@ -1,16 +1,17 @@
 import { motion } from 'motion/react';
 import { Calendar as CalendarIcon, MapPin, ArrowRight, Play, ChevronRight, CalendarDays, Camera, Compass, Cloud, FileText, Utensils, Link as LinkIcon, Gamepad2, Plus } from 'lucide-react';
 import { clsx } from 'clsx';
+import { Link } from 'react-router-dom';
 
 const shortcuts = [
-  { icon: CalendarDays, label: 'Planning', color: 'bg-primary-fixed', textColor: 'text-primary' },
-  { icon: Camera, label: 'Photo/Vidéo', color: 'bg-secondary-fixed', textColor: 'text-secondary' },
-  { icon: Compass, label: 'GPS Famille', color: 'bg-tertiary-fixed', textColor: 'text-tertiary' },
-  { icon: Cloud, label: 'Le Cloud', color: 'bg-primary-fixed', textColor: 'text-primary' },
-  { icon: FileText, label: 'Notes', color: 'bg-tertiary-fixed', textColor: 'text-tertiary' },
-  { icon: Utensils, label: 'Recettes', color: 'bg-secondary-fixed', textColor: 'text-secondary' },
-  { icon: LinkIcon, label: 'Favoris', color: 'bg-primary-fixed', textColor: 'text-primary' },
-  { icon: Gamepad2, label: 'Jeux', color: 'bg-tertiary-fixed', textColor: 'text-tertiary' },
+  { icon: CalendarDays, label: 'Planning', color: 'bg-primary-fixed', textColor: 'text-primary', path: '/planning' },
+  { icon: Camera, label: 'Photo/Vidéo', color: 'bg-secondary-fixed', textColor: 'text-secondary', path: '/photos' },
+  { icon: Compass, label: 'GPS Famille', color: 'bg-tertiary-fixed', textColor: 'text-tertiary', path: '/gps' },
+  { icon: Cloud, label: 'Le Cloud', color: 'bg-primary-fixed', textColor: 'text-primary', path: '#' },
+  { icon: FileText, label: 'Notes', color: 'bg-tertiary-fixed', textColor: 'text-tertiary', path: '#' },
+  { icon: Utensils, label: 'Recettes', color: 'bg-secondary-fixed', textColor: 'text-secondary', path: '/recipes' },
+  { icon: LinkIcon, label: 'Favoris', color: 'bg-primary-fixed', textColor: 'text-primary', path: '#' },
+  { icon: Gamepad2, label: 'Jeux', color: 'bg-tertiary-fixed', textColor: 'text-tertiary', path: '#' },
 ];
 
 const recipes = [
@@ -95,15 +96,16 @@ export default function Home() {
         <h4 className="font-headline text-2xl font-bold text-on-surface">Raccourcis rapides</h4>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {shortcuts.map((item, idx) => (
-            <button
+            <Link
               key={idx}
+              to={item.path}
               className="bg-surface-container hover:bg-surface-container-highest transition-all rounded-lg p-6 flex flex-col items-center justify-center gap-3 text-center active:scale-95"
             >
               <div className={clsx('w-14 h-14 rounded-full flex items-center justify-center', item.color)}>
                 <item.icon className={clsx('text-3xl', item.textColor)} size={28} />
               </div>
               <span className="font-bold text-sm text-on-surface">{item.label}</span>
-            </button>
+            </Link>
           ))}
         </div>
       </section>
