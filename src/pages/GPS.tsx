@@ -4,6 +4,7 @@ import { MapPin, Users } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // Fix for default marker icons in Leaflet with React
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -27,25 +28,41 @@ export default function GPS() {
   const [familyMembers, setFamilyMembers] = useState([...STATIC_FAMILY]);
   const [mapCenter, setMapCenter] = useState<[number, number]>([48.8566, 2.3522]);
   const [mapKey, setMapKey] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
     const savedUser = localStorage.getItem('family_app_user');
+    let updatedMembers = [...STATIC_FAMILY];
+    
     if (savedUser) {
       const user = JSON.parse(savedUser);
-      const updatedMembers = [
+      updatedMembers = [
         { id: 1, name: user.name, position: user.position || [48.8584, 2.2945], role: user.role },
         ...STATIC_FAMILY
       ];
-      setFamilyMembers(updatedMembers);
-      setMapCenter(updatedMembers[0].position as [number, number]);
-      setMapKey(prev => prev + 1);
     } else {
-      setFamilyMembers([
+      updatedMembers = [
         { id: 1, name: 'Marc', position: [48.8584, 2.2945], role: 'Father' },
         ...STATIC_FAMILY
-      ]);
+      ];
     }
-  }, []);
+    
+    setFamilyMembers(updatedMembers);
+
+    // Check if we need to focus on a specific member from navigation state
+    const state = location.state as { focusId?: number };
+    if (state?.focusId) {
+      const target = updatedMembers.find(m => m.id === state.focusId);
+      if (target) {
+        setMapCenter(target.position as [number, number]);
+        setMapKey(prev => prev + 1);
+      }
+    } else {
+      // Default center on user
+      setMapCenter(updatedMembers[0].position as [number, number]);
+      setMapKey(prev => prev + 1);
+    }
+  }, [location.state]);
 
   const handleFocusMember = (position: [number, number]) => {
     setMapCenter(position);
