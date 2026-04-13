@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  --color-primary: #536045;
+  --color-primary-container: #6b795d;
+  --color-on-primary: #ffffff;
+  
+  --color-secondary: #7c5730;
+  --color-secondary-container: #fdcb9b;
+  --color-secondary-fixed: #ffdcbd;
+  --color-on-secondary-fixed: #2c1600;
+  --color-on-secondary-fixed-variant: #61401b;
+
+  --color-tertiary: #695a3c;
+  --color-tertiary-fixed: #f5e0ba;
+
+  --color-surface: #fbfbe2;
+  --color-surface-container: #efefd7;
+  --color-surface-container-low: #f5f5dc;
+  --color-surface-container-high: #eaead1;
+  --color-surface-container-highest: #e4e4cc;
+  --color-surface-bright: #fbfbe2;
+  
+  --color-on-surface: #1b1d0e;
+  --color-on-surface-variant: #454840;
+  
+  --color-outline-variant: #c5c8bd;
+
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
