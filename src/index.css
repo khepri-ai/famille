@@ -37,8 +37,109 @@
 
 @layer base {
   body {
-    @apply bg-surface text-on-surface font-body;
+    @apply bg-surface text-on-surface font-body min-h-screen relative;
+    background-color: #0d0d0d;
+    background-image: 
+      /* Subtle noise texture */
+      url("https://www.transparenttextures.com/patterns/asfalt-dark.png"),
+      /* Technical Grid */
+      linear-gradient(rgba(197, 160, 89, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(197, 160, 89, 0.04) 1px, transparent 1px),
+      /* Larger Grid */
+      linear-gradient(rgba(197, 160, 89, 0.02) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(197, 160, 89, 0.02) 2px, transparent 2px);
+    background-size: auto, 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+    background-attachment: fixed;
   }
+
+  /* Blueprint Decorative Elements */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: 
+      /* Corner Brackets */
+      url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0 L0 0 L0 10 M90 0 L100 0 L100 10 M10 100 L0 100 L0 90 M90 100 L100 100 L100 90' stroke='%23C5A059' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3C/svg%3E"),
+      /* Crosshairs / Targets */
+      url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='2' fill='%23C5A059' opacity='0.1'/%3E%3Cpath d='M100 90 L100 110 M90 100 L110 100' stroke='%23C5A059' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: calc(100% - 40px) calc(100% - 40px), 200px 200px;
+    background-position: center;
+    background-repeat: no-repeat, repeat;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Vignette and Rulers */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+      /* Vignette */
+      radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.5) 100%),
+      /* Top Ruler */
+      linear-gradient(to right, rgba(197, 160, 89, 0.1) 1px, transparent 1px) 0 0 / 10px 10px repeat-x,
+      /* Left Ruler */
+      linear-gradient(to bottom, rgba(197, 160, 89, 0.1) 1px, transparent 1px) 0 0 / 10px 10px repeat-y;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+/* Ornate Frame Layer */
+.app-frame {
+  position: fixed;
+  inset: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  pointer-events: none;
+  z-index: 45;
+}
+
+.app-frame::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.frame-corner {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 46;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Ornate Flourish SVG */
+.corner-tl {
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C10 10 40 5 60 20C80 35 70 65 50 60C30 55 35 30 60 25C85 20 110 40 115 70C120 100 95 115 65 110C35 105 30 80 35 60' stroke='%23C5A059' stroke-width='1.5'/%3E%3Cpath d='M20 20C20 20 35 15 45 25C55 35 50 50 40 45C30 40 32 25 45 20' stroke='%23C5A059' stroke-width='1'/%3E%3Cpath d='M5 5L15 15M5 40L10 35M40 5L35 10' stroke='%23C5A059' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.corner-tr {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C10 10 40 5 60 20C80 35 70 65 50 60C30 55 35 30 60 25C85 20 110 40 115 70C120 100 95 115 65 110C35 105 30 80 35 60' stroke='%23C5A059' stroke-width='1.5'/%3E%3Cpath d='M20 20C20 20 35 15 45 25C55 35 50 50 40 45C30 40 32 25 45 20' stroke='%23C5A059' stroke-width='1'/%3E%3Cpath d='M5 5L15 15M5 40L10 35M40 5L35 10' stroke='%23C5A059' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.corner-bl {
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C10 10 40 5 60 20C80 35 70 65 50 60C30 55 35 30 60 25C85 20 110 40 115 70C120 100 95 115 65 110C35 105 30 80 35 60' stroke='%23C5A059' stroke-width='1.5'/%3E%3Cpath d='M20 20C20 20 35 15 45 25C55 35 50 50 40 45C30 40 32 25 45 20' stroke='%23C5A059' stroke-width='1'/%3E%3Cpath d='M5 5L15 15M5 40L10 35M40 5L35 10' stroke='%23C5A059' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.corner-br {
+  bottom: 0;
+  right: 0;
+  transform: scale(-1);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10C10 10 40 5 60 20C80 35 70 65 50 60C30 55 35 30 60 25C85 20 110 40 115 70C120 100 95 115 65 110C35 105 30 80 35 60' stroke='%23C5A059' stroke-width='1.5'/%3E%3Cpath d='M20 20C20 20 35 15 45 25C55 35 50 50 40 45C30 40 32 25 45 20' stroke='%23C5A059' stroke-width='1'/%3E%3Cpath d='M5 5L15 15M5 40L10 35M40 5L35 10' stroke='%23C5A059' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 .no-scrollbar::-webkit-scrollbar {

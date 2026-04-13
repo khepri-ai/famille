@@ -1,4 +1,16 @@
-import { Menu, User as UserIcon, X, Home, Calendar, Image, Star, Users, UtensilsCrossed } from 'lucide-react';
+import { 
+  Menu, 
+  User as UserIcon, 
+  X, 
+  CalendarDays, 
+  Camera, 
+  MapPin, 
+  Cloud, 
+  FileText, 
+  UtensilsCrossed, 
+  Star, 
+  Gamepad2 
+} from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState, useEffect, useRef } from 'react';
@@ -12,12 +24,14 @@ export default function TopBar() {
   const avatarUrl = profile?.avatar || user?.photoURL || `https://picsum.photos/seed/${user?.uid}/200/200`;
 
   const menuItems = [
-    { label: 'Accueil', path: '/', icon: Home },
-    { label: 'Agenda', path: '/planning', icon: Calendar },
-    { label: 'Albums', path: '/photos', icon: Image },
+    { label: 'Planning', path: '/planning', icon: CalendarDays },
+    { label: 'Photo', path: '/photos', icon: Camera },
+    { label: 'GPS Famille', path: '/gps', icon: MapPin },
+    { label: 'Le Cloud', path: '#', icon: Cloud },
+    { label: 'Note', path: '#', icon: FileText },
+    { label: 'Recettes', path: '/recipes', icon: UtensilsCrossed },
     { label: 'Favoris', path: '/favorites', icon: Star },
-    { label: 'Tribu', path: '/gps', icon: Users },
-    { label: 'Cuisine', path: '/recipes', icon: UtensilsCrossed },
+    { label: 'Jeux', path: '#', icon: Gamepad2 },
   ];
 
   // Close menu when clicking outside
@@ -34,7 +48,7 @@ export default function TopBar() {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-md flex justify-between items-center px-6 py-4 h-20 border-b border-primary/20">
+    <header className="sticky top-6 mx-auto w-[calc(100%-320px)] min-w-[300px] z-50 bg-surface/95 backdrop-blur-md flex justify-between items-center px-6 py-4 h-20 border border-primary/20 rounded-xl shadow-2xl">
       <div className="flex items-center gap-4">
         <button 
           onClick={() => setIsMenuOpen(true)}

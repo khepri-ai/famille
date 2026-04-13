@@ -162,9 +162,6 @@ export default function Home() {
         </div>
       </section>
 
-      <button className="fixed bottom-32 right-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40 border-4 border-surface">
-        <Plus size={32} />
-      </button>
     </motion.div>
   );
 }

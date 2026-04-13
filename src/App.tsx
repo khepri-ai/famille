@@ -15,9 +15,16 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="min-h-screen bg-surface text-on-surface font-body selection:bg-primary/20">
+        <div className="min-h-screen bg-surface text-on-surface font-body selection:bg-primary/20 relative">
+          {/* Ornate Frame */}
+          <div className="app-frame" />
+          <div className="frame-corner corner-tl" />
+          <div className="frame-corner corner-tr" />
+          <div className="frame-corner corner-bl" />
+          <div className="frame-corner corner-br" />
+
           <TopBar />
-          <main className="pb-24">
+          <main className="pt-32 pb-32 px-12 md:px-40">
             <AnimatePresence mode="wait">
               <Routes>
                 <Route path="/" element={<Home />} />
