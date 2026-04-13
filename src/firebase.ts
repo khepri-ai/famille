@@ -6,10 +6,30 @@ import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 // @ts-ignore
 const firebaseConfig = __FIREBASE_CONFIG__ || {};
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId);
-export const googleProvider = new GoogleAuthProvider();
+let app: any;
+let auth: any;
+let db: any;
+let googleProvider: any;
+
+if (firebaseConfig && firebaseConfig.apiKey) {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId);
+  googleProvider = new GoogleAuthProvider();
+} else {
+  console.warn("Firebase configuration is missing or invalid. Firebase features will be disabled.");
+  // Initialize with empty/mock values to prevent immediate crashes
+  auth = { 
+    currentUser: null,
+    onAuthStateChanged: () => () => {},
+    signInWithPopup: () => Promise.reject("Firebase not configured"),
+    signOut: () => Promise.resolve()
+  } as any;
+  db = {} as any;
+  googleProvider = {} as any;
+}
+
+export { auth, db, googleProvider };
 
 // Test connection
 async function testConnection() {
